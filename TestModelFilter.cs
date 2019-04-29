@@ -10,7 +10,8 @@ namespace filtersplayground
 		{
 			Name = "TestModelFilter";
 			descriptor.Filter(x => x.Test).AddAll();
-			descriptor.Filter(x => x.TestInt).AddAll(); 
+			descriptor.Filter(x => x.TestInt).AddAll();
+			descriptor.Filter<TestModelFilter, TestModel>(x => x.TestModal).AddAll();
 
 
 		}

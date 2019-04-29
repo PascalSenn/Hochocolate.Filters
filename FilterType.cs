@@ -12,7 +12,7 @@ using HotChocolate.Utilities;
 namespace filtersplayground
 {
     public class FilterType<T>
-    : InputObjectType<T>
+    : InputObjectType<T> , IFilterType
     {
         private readonly Action<IFilterTypeDescriptor<T>> _configure;
 

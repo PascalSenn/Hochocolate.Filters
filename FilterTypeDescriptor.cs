@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using filtersplayground.Filters;
 using filtersplayground.Filters.ComparableFilter;
+using filtersplayground.Filters.Object;
 using filtersplayground.Filters.String;
 using HotChocolate;
 using HotChocolate.Types.Descriptors;
@@ -42,14 +43,19 @@ namespace filtersplayground
 			Filters.Add(filter);
 			return filter;
 		}
+		public IObjectFilterFieldsDescriptor Filter<TFilterType, TValue>(Expression<Func<T, TValue>> propertyOrMethod) where TFilterType : IFilterType
+		{
+			var filter = new ObjectFilterFieldsDescriptor<T, TFilterType, TValue>(Context, this, propertyOrMethod);
+			Filters.Add(filter);
+			return filter;
+		}
 
 
 		protected override void OnCreateDefinition(InputObjectTypeDefinition definition)
-		{
-
+		{ 
 			Fields.AddRange(Filters.SelectMany(x => x.Filters.Values));
 			base.OnCreateDefinition(definition);
 		}
-		 
+
 	}
 }

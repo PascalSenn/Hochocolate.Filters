@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace filtersplayground.Filters
 {
-	public abstract class FilterFieldDescriptor<T> : InputFieldDescriptor
+	public abstract class FilterFieldDescriptor<T> : InputFieldDescriptor, IFilterFieldDescriptor<T>
 	{ 
 		private FilterFieldDescriptor(IDescriptorContext context, NameString fieldName) : base(context, fieldName)
 		{
