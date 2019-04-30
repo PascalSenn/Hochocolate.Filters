@@ -38,7 +38,6 @@ namespace filtersplayground.Filters
 					innerType = typeof(Nullable<>).MakeGenericType(type.Type);
 				}
 				return new ClrTypeReference(innerType, type.Context, true, true);
-
 			}
 			throw new ArgumentException("Definition has no valid Type");
 		}

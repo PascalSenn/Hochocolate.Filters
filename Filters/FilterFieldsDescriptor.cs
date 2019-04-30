@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 
 namespace filtersplayground.Filters
 {
-	public abstract class FilterFieldsDescriptor<T, TValue> : IFilterFieldsDescriptor<T>
-	{  
+	public abstract class FilterFieldsDescriptor<T, TValue> : IFilterFieldsDescriptor<T, TValue>
+	{
 		public Dictionary<NameString, FilterFieldDescriptor<T>> Filters { get; } = new Dictionary<NameString, FilterFieldDescriptor<T>>();
 
-		protected readonly IDescriptorContext context;
-		protected readonly IInputObjectTypeDescriptor descriptor;
-		protected readonly PropertyInfo propertyInfo;
-		protected readonly Expression<Func<T, TValue>> selector;
+		public IDescriptorContext Context {get;}
+		public IInputObjectTypeDescriptor Descriptor { get; }
+		public PropertyInfo PropertyInfo { get; }
+		public Expression<Func<T, TValue>> Selector { get; }
 
 		public FilterFieldsDescriptor(IDescriptorContext context,
 			IInputObjectTypeDescriptor descriptor, Expression<Func<T, TValue>> selector)
 		{
-			this.context = context;
-			this.descriptor = descriptor;
-			this.selector = selector;
-			this.propertyInfo = GetPropertyInfo(selector);
+			this.Context = context;
+			this.Descriptor = descriptor;
+			this.Selector = selector;
+			this.PropertyInfo = GetPropertyInfo(selector);
 		}
 
 		private PropertyInfo GetPropertyInfo<TPropertyType>(
